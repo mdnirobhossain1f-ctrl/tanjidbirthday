@@ -3,616 +3,710 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎉 Happy Birthday TANJID 🎉</title>
+<title>🎂 TANJID VIP HACKER BIRTHDAY 🎂</title>
 <style>
   :root{
-    --c1:#ff0080;
-    --c2:#00e5ff;
-    --c3:#ffe600;
-    --c4:#7c4dff;
+    --neon:#00ff88;
+    --pink:#ff0080;
+    --cyan:#00e5ff;
+    --yellow:#ffe600;
+    --purple:#7c4dff;
+    --bg:#050a05;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace;}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:#fff;}
 
-  /* ================= BACKGROUND ================= */
-  body{
-    background:linear-gradient(-45deg,#0f0026,#2a0044,#001f3f,#3d0018,#001a2e);
-    background-size:400% 400%;
-    animation:bgMove 14s ease infinite;
-  }
-  @keyframes bgMove{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  /* ================= MATRIX BACKGROUND ================= */
+  #matrix{
+    position:fixed;inset:0;z-index:1;opacity:.18;
   }
 
-  /* ================= CANVAS ================= */
-  #fx{position:fixed;inset:0;z-index:3;pointer-events:none;}
+  /* ================= SCANLINE OVERLAY ================= */
+  .scanlines{
+    position:fixed;inset:0;z-index:2;pointer-events:none;
+    background:repeating-linear-gradient(
+      0deg,
+      rgba(0,255,136,.03) 0px,
+      rgba(0,255,136,.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    animation:scanMove 8s linear infinite;
+  }
+  @keyframes scanMove{0%{background-position:0 0}100%{background-position:0 100px}}
 
   /* ================= LOGIN ================= */
   #loginPage{
     position:fixed;inset:0;z-index:100;
     display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle at 50% 40%,#1b0033,#05000d 70%);
-    transition:opacity .8s ease, transform .8s ease;
+    background:radial-gradient(circle at 50% 50%,#0a1f0a,#000 70%);
+    transition:opacity .8s,transform .8s;
   }
-  #loginPage.hide{opacity:0;transform:scale(1.3);pointer-events:none;}
-  .loginBox{
-    width:340px;max-width:90vw;padding:38px 28px;border-radius:24px;
-    background:rgba(255,255,255,.06);
-    border:2px solid transparent;
-    background-clip:padding-box;
-    backdrop-filter:blur(14px);
-    box-shadow:0 0 40px rgba(255,0,128,.5),0 0 90px rgba(0,229,255,.25);
-    text-align:center;position:relative;
-    animation:loginPulse 3s ease-in-out infinite;
-  }
-  @keyframes loginPulse{
-    0%,100%{box-shadow:0 0 40px rgba(255,0,128,.5),0 0 90px rgba(0,229,255,.25);}
-    50%{box-shadow:0 0 60px rgba(0,229,255,.7),0 0 110px rgba(255,0,128,.4);}
-  }
-  .loginBox::before{
-    content:"";position:absolute;inset:-2px;border-radius:26px;z-index:-1;
-    background:linear-gradient(45deg,#ff0080,#00e5ff,#ffe600,#7c4dff,#ff0080);
-    background-size:300% 300%;
-    animation:borderFlow 4s linear infinite;
-  }
-  @keyframes borderFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-  .loginBox h1{
-    font-size:26px;color:#fff;margin-bottom:6px;letter-spacing:1px;
-    text-shadow:0 0 12px #00e5ff,0 0 24px #ff0080;
-  }
-  .loginBox p{color:#b9a8ff;font-size:13px;margin-bottom:22px;}
-  .loginBox input{
-    width:100%;padding:14px 16px;border-radius:14px;border:2px solid #7c4dff;
-    background:rgba(0,0,0,.35);color:#fff;font-size:17px;text-align:center;
-    letter-spacing:2px;outline:none;transition:.3s;
-  }
-  .loginBox input:focus{border-color:#00e5ff;box-shadow:0 0 20px #00e5ff;}
-  .loginBox button{
-    width:100%;margin-top:16px;padding:14px;border:none;border-radius:14px;
-    background:linear-gradient(90deg,#ff0080,#7c4dff,#00e5ff);
-    background-size:200% 100%;color:#fff;font-size:17px;font-weight:700;
-    letter-spacing:1px;cursor:pointer;transition:.3s;
-    animation:btnFlow 3s linear infinite;
-  }
-  @keyframes btnFlow{0%{background-position:0% 0}100%{background-position:200% 0}}
-  .loginBox button:hover{transform:scale(1.05);box-shadow:0 0 25px #ff0080;}
-  .err{color:#ff4d6d;font-size:13px;margin-top:12px;height:16px;}
-  .shake{animation:shake .4s;}
-  @keyframes shake{
-    0%,100%{transform:translateX(0)}
-    25%{transform:translateX(-10px)}
-    75%{transform:translateX(10px)}
-  }
+  #loginPage.hide{opacity:0;transform:scale(1.4);pointer-events:none;}
 
-  /* ================= MAIN PAGE ================= */
-  #mainPage{position:fixed;inset:0;z-index:2;display:none;overflow:hidden;}
+  .terminal{
+    width:420px;max-width:92vw;padding:30px 26px;border-radius:14px;
+    background:rgba(0,20,0,.85);
+    border:2px solid var(--neon);
+    box-shadow:0 0 30px var(--neon),inset 0 0 30px rgba(0,255,136,.1);
+    position:relative;font-family:'Courier New',monospace;
+  }
+  .terminal::before{
+    content:"● ● ●";position:absolute;top:-12px;left:20px;
+    background:var(--neon);color:#000;padding:2px 12px;border-radius:8px;
+    font-size:12px;letter-spacing:3px;
+  }
+  .terminal h1{
+    color:var(--neon);font-size:19px;margin-bottom:8px;
+    text-shadow:0 0 12px var(--neon);
+  }
+  .terminal h1::before{content:"> ";}
+  .terminal .hint{color:#5f9;font-size:12px;margin-bottom:20px;opacity:.7;}
+  .terminal input{
+    width:100%;padding:13px;background:#000;border:1px solid var(--neon);
+    color:var(--neon);font-size:16px;font-family:inherit;
+    outline:none;border-radius:6px;letter-spacing:2px;
+  }
+  .terminal input:focus{box-shadow:0 0 20px var(--neon);}
+  .terminal button{
+    width:100%;margin-top:14px;padding:13px;border:1px solid var(--neon);
+    background:var(--neon);color:#000;font-weight:900;font-size:15px;
+    cursor:pointer;border-radius:6px;letter-spacing:2px;
+    transition:.3s;font-family:inherit;
+  }
+  .terminal button:hover{background:#000;color:var(--neon);box-shadow:0 0 25px var(--neon);}
+  .err{color:#ff3355;font-size:12px;margin-top:10px;height:16px;}
+
+  /* ================= MAIN ================= */
+  #mainPage{position:fixed;inset:0;z-index:5;display:none;overflow-y:auto;overflow-x:hidden;}
   #mainPage.show{display:block;}
+  #mainPage::-webkit-scrollbar{width:6px;}
+  #mainPage::-webkit-scrollbar-thumb{background:var(--neon);border-radius:3px;}
 
-  /* ---- TIGER WALK ---- */
-  .tigerWrap{
-    position:absolute;top:8px;left:0;width:100%;height:70px;z-index:20;
-    pointer-events:none;overflow:hidden;
+  /* ================= HACKER HEADER ================= */
+  .hackHeader{
+    position:relative;padding:18px 14px 12px;text-align:center;
+    border-bottom:1px solid rgba(0,255,136,.3);
+    background:rgba(0,20,0,.6);backdrop-filter:blur(6px);
   }
-  .tiger{
-    position:absolute;top:0;left:-420px;
-    font-size:38px;white-space:nowrap;
-    animation:tigerWalk 16s linear infinite;
-    display:flex;align-items:center;gap:14px;
+  .hackHeader .status{
+    display:inline-block;font-size:11px;color:var(--neon);
+    border:1px solid var(--neon);padding:3px 10px;border-radius:20px;
+    margin-bottom:10px;letter-spacing:2px;
+    animation:blink 1.2s infinite;
   }
-  @keyframes tigerWalk{
-    0%{left:-460px;transform:scaleX(-1);}
-    48%{left:100%;transform:scaleX(-1);}
-    50%{left:100%;transform:scaleX(1);}
-    98%{left:-460px;transform:scaleX(1);}
-    100%{left:-460px;transform:scaleX(-1);}
-  }
-  .tigerText{
-    font-size:20px;font-weight:900;letter-spacing:2px;
-    background:linear-gradient(90deg,#ffe600,#ff0080,#00e5ff,#ffe600);
-    background-size:300% 100%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:btnFlow 2.5s linear infinite;
-    text-shadow:0 0 20px rgba(255,230,0,.4);
-  }
-
-  /* ---- PHOTOS ---- */
-  .photoRow{
-    position:absolute;top:78px;left:0;width:100%;
-    display:flex;justify-content:center;gap:22px;z-index:10;
-  }
-  .photoBox{
-    width:135px;height:135px;border-radius:50%;overflow:hidden;
-    border:4px solid transparent;
-    background:linear-gradient(#000,#000) padding-box,
-               linear-gradient(45deg,#ff0080,#00e5ff,#ffe600,#7c4dff) border-box;
-    box-shadow:0 0 30px rgba(255,0,128,.7),0 0 60px rgba(0,229,255,.4);
-    animation:floaty 3.5s ease-in-out infinite;
-  }
-  .photoBox:nth-child(2){animation-delay:1.2s;}
-  .photoBox img{width:100%;height:100%;object-fit:cover;display:block;}
-  @keyframes floaty{
-    0%,100%{transform:translateY(0) rotate(-3deg) scale(1);}
-    50%{transform:translateY(-18px) rotate(3deg) scale(1.06);}
-  }
-
-  /* ---- TITLE ---- */
-  .titleWrap{
-    position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);
-    width:100%;text-align:center;z-index:12;padding:0 10px;
-  }
+  @keyframes blink{50%{opacity:.35}}
   #typeTitle{
-    font-size:clamp(26px,7vw,64px);font-weight:900;letter-spacing:2px;
-    min-height:1.2em;
-    filter:drop-shadow(0 0 18px currentColor);
-    transition:color .6s;
-  }
-  .subTitle{
-    margin-top:14px;font-size:clamp(14px,3.5vw,24px);font-weight:700;
-    letter-spacing:1px;
-    animation:rainbow 4s linear infinite;
-  }
-  @keyframes rainbow{
-    0%{color:#ff0080}25%{color:#ffe600}50%{color:#00e5ff}75%{color:#7c4dff}100%{color:#ff0080}
+    font-size:clamp(20px,5.5vw,42px);font-weight:900;letter-spacing:3px;
+    min-height:1.3em;transition:color .6s;
+    text-shadow:0 0 20px currentColor;
   }
 
-  /* ---- BENGALI TEXT ---- */
-  .bnBox{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-    width:min(680px,94vw);z-index:12;text-align:center;
-    padding:16px 18px;border-radius:20px;
-    background:rgba(0,0,0,.35);backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,.15);
-    box-shadow:0 0 30px rgba(124,77,255,.5);
+  /* ================= PHOTO ALBUM (FRIENDS) ================= */
+  .section{
+    padding:22px 14px;position:relative;z-index:6;
   }
-  .bnBox p{
-    color:#fff;font-size:clamp(12px,3.2vw,16px);line-height:1.75;
-    margin:2px 0;opacity:0;
-    animation:fadeUp .8s forwards;
-    text-shadow:0 0 8px rgba(0,229,255,.6);
+  .sectionTitle{
+    color:var(--neon);font-size:15px;letter-spacing:3px;margin-bottom:14px;
+    padding-left:10px;border-left:3px solid var(--pink);
+    text-shadow:0 0 10px var(--neon);
   }
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(16px);}
-    to{opacity:1;transform:translateY(0);}
+  .sectionTitle::before{content:"[ ";color:var(--pink);}
+  .sectionTitle::after{content:" ]";color:var(--pink);}
+
+  .albumGrid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+    gap:14px;
+  }
+  .albumCard{
+    position:relative;border-radius:12px;overflow:hidden;
+    border:2px solid transparent;
+    background:linear-gradient(#000,#000) padding-box,
+               linear-gradient(135deg,var(--neon),var(--pink),var(--cyan)) border-box;
+    aspect-ratio:1/1;cursor:pointer;
+    box-shadow:0 0 18px rgba(0,255,136,.4);
+    transition:.4s;animation:floaty 4s ease-in-out infinite;
+  }
+  .albumCard:nth-child(2n){animation-delay:.6s}
+  .albumCard:nth-child(3n){animation-delay:1.2s}
+  .albumCard:hover{transform:scale(1.08) rotate(-2deg);box-shadow:0 0 32px var(--pink);}
+  .albumCard img{width:100%;height:100%;object-fit:cover;display:block;}
+  .albumCard .caption{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.9));
+    color:var(--neon);font-size:11px;padding:14px 8px 8px;
+    letter-spacing:1px;text-align:center;
+  }
+  @keyframes floaty{
+    0%,100%{transform:translateY(0) rotate(-1deg);}
+    50%{transform:translateY(-8px) rotate(1deg);}
   }
 
-  /* ---- BALLOONS ---- */
-  .balloon{
-    position:absolute;bottom:-140px;font-size:44px;z-index:8;
-    animation:rise linear infinite;
-    pointer-events:none;
-    filter:drop-shadow(0 0 10px rgba(255,255,255,.4));
+  /* ================= NOTEBOOK ================= */
+  .notebook{
+    background:rgba(0,20,0,.55);
+    border:1px solid var(--neon);
+    border-radius:14px;padding:20px;
+    font-family:'Courier New',monospace;
+    box-shadow:0 0 22px rgba(0,255,136,.25),inset 0 0 30px rgba(0,255,136,.05);
+    position:relative;
   }
-  @keyframes rise{
-    0%{transform:translateY(0) rotate(0deg);opacity:0;}
-    10%{opacity:1;}
-    100%{transform:translateY(-115vh) rotate(25deg);opacity:0;}
+  .notebook::before{
+    content:"📓 TANJID's NOTEBOOK";
+    position:absolute;top:-12px;left:20px;
+    background:var(--bg);color:var(--yellow);
+    font-size:12px;padding:2px 12px;letter-spacing:2px;
+    border:1px solid var(--yellow);border-radius:6px;
+  }
+  .notebook p{
+    color:#c8ffd8;font-size:13px;line-height:1.9;margin:8px 0;
+    padding-left:24px;position:relative;
+  }
+  .notebook p::before{
+    content:"▸";position:absolute;left:6px;color:var(--pink);
+  }
+  .notebook p .hl{color:var(--yellow);font-weight:bold;text-shadow:0 0 8px var(--yellow);}
+
+  /* ================= GAMES ================= */
+  .gamesWrap{
+    display:grid;grid-template-columns:1fr;gap:22px;
+  }
+  @media(min-width:700px){.gamesWrap{grid-template-columns:1fr 1fr;}}
+
+  .gameBox{
+    background:rgba(0,15,25,.6);
+    border:1px solid var(--cyan);
+    border-radius:14px;padding:18px;
+    box-shadow:0 0 22px rgba(0,229,255,.3);
+  }
+  .gameBox h3{
+    color:var(--cyan);font-size:14px;letter-spacing:2px;margin-bottom:14px;
+    text-shadow:0 0 10px var(--cyan);
   }
 
-  /* ---- MUSIC BUTTON ---- */
+  /* Tic Tac Toe */
+  .tttGrid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    max-width:240px;margin:0 auto;
+  }
+  .tttCell{
+    aspect-ratio:1/1;background:#000;border:1px solid var(--neon);
+    color:var(--neon);font-size:34px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;border-radius:8px;transition:.25s;
+    font-family:'Courier New',monospace;
+  }
+  .tttCell:hover{background:rgba(0,255,136,.15);box-shadow:0 0 15px var(--neon);}
+  .tttCell.x{color:var(--pink);text-shadow:0 0 15px var(--pink);}
+  .tttCell.o{color:var(--cyan);text-shadow:0 0 15px var(--cyan);}
+  .tttStatus{text-align:center;color:var(--yellow);font-size:13px;margin-top:12px;letter-spacing:1px;}
+  .gameBox button{
+    display:block;margin:12px auto 0;padding:9px 22px;
+    background:transparent;color:var(--cyan);border:1px solid var(--cyan);
+    border-radius:8px;cursor:pointer;letter-spacing:2px;font-family:inherit;
+    font-size:12px;transition:.3s;
+  }
+  .gameBox button:hover{background:var(--cyan);color:#000;box-shadow:0 0 18px var(--cyan);}
+
+  /* Guessing Game */
+  .guessInput{
+    width:100%;padding:11px;background:#000;border:1px solid var(--yellow);
+    color:var(--yellow);font-size:15px;font-family:inherit;text-align:center;
+    border-radius:8px;outline:none;letter-spacing:2px;
+  }
+  .guessInput:focus{box-shadow:0 0 18px var(--yellow);}
+  .guessMsg{text-align:center;color:var(--neon);font-size:13px;margin-top:10px;min-height:18px;letter-spacing:1px;}
+
+  /* ================= FOOTER ================= */
+  .footer{
+    text-align:center;padding:20px;color:var(--neon);
+    font-size:12px;letter-spacing:2px;opacity:.7;
+    border-top:1px solid rgba(0,255,136,.2);
+  }
+  .footer::before{content:"// ";color:var(--pink);}
+  .footer::after{content:" //";color:var(--pink);}
+
+  /* ================= FLOATING HACK TEXT ================= */
+  .hackFloat{
+    position:fixed;color:var(--neon);font-size:12px;
+    pointer-events:none;z-index:3;opacity:.5;
+    font-family:'Courier New',monospace;
+    animation:floatUp linear forwards;
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(0);opacity:.6;}
+    100%{transform:translateY(-200px);opacity:0;}
+  }
+
+  /* ================= MUSIC BTN ================= */
   #musicBtn{
     position:fixed;top:14px;right:14px;z-index:60;
-    width:52px;height:52px;border-radius:50%;border:2px solid #00e5ff;
-    background:rgba(0,0,0,.5);color:#fff;font-size:22px;cursor:pointer;
-    box-shadow:0 0 18px #00e5ff;transition:.3s;
+    width:50px;height:50px;border-radius:50%;
+    border:2px solid var(--neon);background:rgba(0,0,0,.7);
+    color:var(--neon);font-size:20px;cursor:pointer;
+    box-shadow:0 0 20px var(--neon);transition:.3s;display:none;
   }
-  #musicBtn:hover{transform:scale(1.12) rotate(12deg);}
+  #musicBtn:hover{transform:scale(1.1) rotate(15deg);}
 
-  /* ---- GLOW RING ---- */
-  .ring{
-    position:absolute;border-radius:50%;border:2px solid;
-    animation:ringPulse 3s ease-out infinite;
-    pointer-events:none;z-index:5;
+  /* ================= POPUP ================= */
+  .popup{
+    position:fixed;inset:0;z-index:200;display:none;
+    align-items:center;justify-content:center;
+    background:rgba(0,0,0,.92);backdrop-filter:blur(6px);
   }
-  @keyframes ringPulse{
-    0%{transform:scale(.2);opacity:1;}
-    100%{transform:scale(2.6);opacity:0;}
+  .popup.show{display:flex;}
+  .popup img{
+    max-width:88vw;max-height:80vh;border-radius:14px;
+    border:3px solid var(--neon);box-shadow:0 0 50px var(--neon);
+    animation:popIn .4s ease;
+  }
+  @keyframes popIn{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .popup .close{
+    position:absolute;top:20px;right:24px;font-size:32px;
+    color:var(--neon);cursor:pointer;font-weight:900;
   }
 </style>
 </head>
 <body>
 
-<!-- ================= LOGIN PAGE ================= -->
+<!-- ===== MATRIX CANVAS BG ===== -->
+<canvas id="matrix"></canvas>
+<div class="scanlines"></div>
+
+<!-- ================= LOGIN ================= -->
 <div id="loginPage">
-  <div class="loginBox" id="loginBox">
-    <h1>🎂 VIP LOGIN 🎂</h1>
-    <p>Shudhu TANJID er jonno 🤫</p>
-    <input id="userInput" type="text" placeholder="NAME LIKHO..." autocomplete="off">
-    <button onclick="doLogin()">🔓 LOGIN</button>
+  <div class="terminal" id="termBox">
+    <h1>VIP ACCESS TERMINAL</h1>
+    <div class="hint">// Enter password to unlock birthday protocol</div>
+    <input id="userInput" type="text" placeholder="ENTER NAME..." autocomplete="off">
+    <button onclick="doLogin()">▶ AUTHENTICATE</button>
     <div class="err" id="errMsg"></div>
   </div>
 </div>
 
-<!-- ================= MAIN PAGE ================= -->
+<!-- ================= MAIN ================= -->
 <div id="mainPage">
-  <canvas id="fx"></canvas>
+  <canvas id="fx" style="position:fixed;inset:0;z-index:4;pointer-events:none;"></canvas>
 
-  <!-- TIGER -->
-  <div class="tigerWrap">
-    <div class="tiger">
-      <span>🐯</span>
-      <span class="tigerText">HAPPY BIRTHDAY TANJID 🎉</span>
-      <span>🐯</span>
+  <!-- HEADER -->
+  <div class="hackHeader">
+    <div class="status">● SYSTEM ONLINE — TARGET: TANJID</div>
+    <div id="typeTitle"></div>
+  </div>
+
+  <!-- ALBUM -->
+  <div class="section">
+    <div class="sectionTitle">FRIEND ALBUM — MEMORIES.LOG</div>
+    <div class="albumGrid" id="albumGrid"></div>
+  </div>
+
+  <!-- NOTEBOOK -->
+  <div class="section">
+    <div class="notebook">
+      <p>Hey <span class="hl">TANJID</span>, tor sathe kotha bolte giye mone hoy time theme jay.</p>
+      <p>Tor hashi ta <span class="hl">virus</span> er moto choriye pore sob khan e.</p>
+      <p>Tor sathe <span class="hl">notebook</span> a leka ei kotha gulo — vulbi na kabhu.</p>
+      <p>Tor <span class="hl">friendship</span> ekta encrypted file, jeta keu hack korte parbe na.</p>
+      <p>Aj tor birthday — <span class="hl">system</span> fire korbo, cake khabo, halahala korbo!</p>
+      <p>Valo thak <span class="hl">TANJID</span>, ei bondhutto jeno hoye thake sarajibon.</p>
     </div>
   </div>
 
-  <!-- PHOTOS -->
-  <div class="photoRow">
-    <div class="photoBox"><img src="web.jpg" alt="Tanjid" onerror="this.src='https://via.placeholder.com/300/ff0080/ffffff?text=TANJID'"></div>
-    <div class="photoBox"><img src="web.jpg" alt="Tanjid" onerror="this.src='https://via.placeholder.com/300/00e5ff/ffffff?text=TANJID'"></div>
+  <!-- GAMES -->
+  <div class="section">
+    <div class="sectionTitle">HACKER GAMES.EXE</div>
+    <div class="gamesWrap">
+
+      <!-- TIC TAC TOE -->
+      <div class="gameBox">
+        <h3>🎮 TIC TAC TOE — YOU (X) vs AI (O)</h3>
+        <div class="tttGrid" id="tttGrid"></div>
+        <div class="tttStatus" id="tttStatus">Your turn — click a cell!</div>
+        <button onclick="resetTTT()">↻ RESET GAME</button>
+      </div>
+
+      <!-- GUESS NUMBER -->
+      <div class="gameBox">
+        <h3>🔢 GUESS THE CODE — 1 to 100</h3>
+        <input class="guessInput" id="guessInput" type="number" placeholder="ENTER NUMBER..." min="1" max="100">
+        <div class="guessMsg" id="guessMsg">Hint: 1 theke 100 er moddhe ekta number</div>
+        <button onclick="checkGuess()">▶ SUBMIT GUESS</button>
+        <button onclick="resetGuess()">↻ NEW CODE</button>
+      </div>
+
+    </div>
   </div>
 
-  <!-- TITLE -->
-  <div class="titleWrap">
-    <div id="typeTitle"></div>
-    <div class="subTitle">🎈 শুভ জন্মদিন টানজিদ 🎈</div>
-  </div>
-
-  <!-- BENGALI TEXT -->
-  <div class="bnBox" id="bnBox">
-    <p style="animation-delay:.3s">🎂 আজকের এই দিনটা তোমার জন্য একদম SPECIAL!</p>
-    <p style="animation-delay:.8s">💖 তোমার জীবন ভরে উঠুক সুখ, শান্তি আর ভালোবাসায়।</p>
-    <p style="animation-delay:1.3s">✨ তোমার সব স্বপ্ন একদিন সত্যি হোক, প্রতিটা দিন হোক আনন্দময়।</p>
-    <p style="animation-delay:1.8s">🌸 তুমি সবসময় হাসিখুশি থাকো, দীর্ঘায়ু হও আর সুস্থ থাকো।</p>
-    <p style="animation-delay:2.3s">🎁 এই নতুন বছরে পূর্ণ হোক তোমার সব ইচ্ছা।</p>
-    <p style="animation-delay:2.8s">🎉 HAPPY BIRTHDAY TANJID — YOU ARE THE BEST! 🎊</p>
-  </div>
+  <!-- FOOTER -->
+  <div class="footer">HAPPY BIRTHDAY TANJID — VIP HACKER EDITION</div>
 </div>
 
-<button id="musicBtn" onclick="toggleMusic()" style="display:none">🔊</button>
+<button id="musicBtn" onclick="toggleMusic()">🔊</button>
+
+<!-- POPUP -->
+<div class="popup" id="popup" onclick="closePopup(event)">
+  <span class="close" onclick="closePopup(event,true)">✕</span>
+  <img id="popupImg" src="" alt="photo">
+</div>
 
 <script>
 /* ============================================================
-   1) LOGIN
+   MATRIX BACKGROUND
+============================================================ */
+const mCanvas = document.getElementById('matrix');
+const mCtx = mCanvas.getContext('2d');
+let cols, drops;
+const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789TANJIDHACK'.split('');
+
+function initMatrix(){
+  mCanvas.width = window.innerWidth;
+  mCanvas.height = window.innerHeight;
+  cols = Math.floor(mCanvas.width / 16);
+  drops = Array(cols).fill(1);
+}
+function drawMatrix(){
+  mCtx.fillStyle = 'rgba(0,0,0,.08)';
+  mCtx.fillRect(0,0,mCanvas.width,mCanvas.height);
+  mCtx.fillStyle = '#00ff88';
+  mCtx.font = '15px monospace';
+  for(let i=0;i<drops.length;i++){
+    const ch = chars[Math.floor(Math.random()*chars.length)];
+    mCtx.fillText(ch, i*16, drops[i]*16);
+    if(drops[i]*16 > mCanvas.height && Math.random() > .975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+initMatrix();
+setInterval(drawMatrix, 55);
+window.addEventListener('resize', initMatrix);
+
+/* ============================================================
+   LOGIN
 ============================================================ */
 function doLogin(){
-  const val = document.getElementById('userInput').value.trim().toLowerCase();
+  const v = document.getElementById('userInput').value.trim().toLowerCase();
   const err = document.getElementById('errMsg');
-  const box = document.getElementById('loginBox');
-
-  if(val === 'tanjid' || val === 'টানজিদ'){
+  const box = document.getElementById('termBox');
+  if(v === 'tanjid' || v === 'টানজিদ'){
     document.getElementById('loginPage').classList.add('hide');
     document.getElementById('mainPage').classList.add('show');
     document.getElementById('musicBtn').style.display = 'block';
     setTimeout(()=>{
       document.getElementById('loginPage').style.display='none';
-      startEverything();
-    }, 800);
+      startAll();
+    },800);
   } else {
-    err.textContent = '❌ Bhul name! TANJID likho...';
-    box.classList.add('shake');
-    setTimeout(()=>box.classList.remove('shake'), 450);
+    err.textContent = '⛔ ACCESS DENIED — Try: TANJID';
+    box.style.animation='none'; void box.offsetWidth; box.style.animation='shake .4s';
   }
 }
 document.getElementById('userInput').addEventListener('keydown', e=>{
-  if(e.key === 'Enter') doLogin();
+  if(e.key==='Enter') doLogin();
 });
+const st = document.createElement('style');
+st.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}';
+document.head.appendChild(st);
 
 /* ============================================================
-   2) MUSIC (Happy Birthday tune via Web Audio API)
+   MUSIC — Happy Birthday melody
 ============================================================ */
-let audioCtx = null;
-let musicOn = true;
-let melodyTimeout = null;
-
-const FREQ = {
-  G4:392.00, A4:440.00, B4:493.88, C5:523.25,
-  D5:587.33, E5:659.25, F5:698.46, G5:783.99
-};
-
-// [note, beats]
-const MELODY = [
+let audioCtx=null, musicOn=true, melTimeout=null;
+const F={G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25,F5:698.46,G5:783.99};
+const MELODY=[
   ['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],
   ['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
   ['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',2],
-  ['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2],
-  [null,1.5]
+  ['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2],[null,1.5]
 ];
-const BEAT = 0.42;
-
-function tone(freq, dur){
+const BEAT=.42;
+function tone(f,d){
   if(!audioCtx) return;
-  const t = audioCtx.currentTime;
-  const osc = audioCtx.createOscillator();
-  const osc2 = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-
-  osc.type = 'triangle';
-  osc2.type = 'sine';
-  osc.frequency.value = freq;
-  osc2.frequency.value = freq * 2;
-
-  const g2 = audioCtx.createGain();
-  g2.gain.value = 0.25;
-  osc2.connect(g2); g2.connect(g);
-  osc.connect(g);
-  g.connect(audioCtx.destination);
-
-  g.gain.setValueAtTime(0, t);
-  g.gain.linearRampToValueAtTime(0.22, t + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.001, t + dur * 0.95);
-
-  osc.start(t); osc2.start(t);
-  osc.stop(t + dur); osc2.stop(t + dur);
+  const t=audioCtx.currentTime;
+  const o1=audioCtx.createOscillator(),o2=audioCtx.createOscillator(),g=audioCtx.createGain(),g2=audioCtx.createGain();
+  o1.type='triangle'; o2.type='sine';
+  o1.frequency.value=f; o2.frequency.value=f*2;
+  g2.gain.value=.25;
+  o2.connect(g2); g2.connect(g); o1.connect(g); g.connect(audioCtx.destination);
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(.22,t+.02);
+  g.gain.exponentialRampToValueAtTime(.001,t+d*.95);
+  o1.start(t); o2.start(t); o1.stop(t+d); o2.stop(t+d);
 }
-
 function playMelody(){
   if(!musicOn) return;
-  let time = 0;
-  MELODY.forEach(([note, beats])=>{
-    const dur = beats * BEAT;
-    if(note) setTimeout(()=>{ if(musicOn) tone(FREQ[note], dur); }, time*1000);
-    time += dur;
+  let tm=0;
+  MELODY.forEach(([n,b])=>{
+    const d=b*BEAT;
+    if(n) setTimeout(()=>{ if(musicOn) tone(F[n],d); }, tm*1000);
+    tm+=d;
   });
-  melodyTimeout = setTimeout(playMelody, (time + 1.2) * 1000);
+  melTimeout=setTimeout(playMelody,(tm+1.2)*1000);
 }
-
 function toggleMusic(){
-  musicOn = !musicOn;
-  document.getElementById('musicBtn').textContent = musicOn ? '🔊' : '🔇';
-  if(musicOn){ playMelody(); }
-  else { clearTimeout(melodyTimeout); }
+  musicOn=!musicOn;
+  document.getElementById('musicBtn').textContent = musicOn?'🔊':'🔇';
+  if(musicOn) playMelody(); else clearTimeout(melTimeout);
 }
 
 /* ============================================================
-   3) START EVERYTHING
+   ALBUM PHOTOS
 ============================================================ */
-function startEverything(){
-  try{
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    playMelody();
-  }catch(e){ console.log('audio error', e); }
-
-  startTyping();
-  startColorCycle();
-  makeBalloons();
-  makeRings();
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  requestAnimationFrame(loop);
-  // big initial burst
-  for(let i=0;i<5;i++) setTimeout(()=>bigBurst(), i*350);
-}
-
-/* ============================================================
-   4) TYPING ANIMATION
-============================================================ */
-const TEXTS = [
-  'HAPPY BIRTHDAY TANJID',
-  'শুভ জন্মদিন TANJID',
-  '🎉 HAPPY BIRTHDAY TANJID 🎉',
-  'TANJID ❤️ BEST DAY EVER',
-  '🎂 HAPPY BIRTHDAY TANJID 🎂'
+const ALBUM=[
+  {src:'web.jpg', cap:'TANJID ❤️'},
+  {src:'web.jpg', cap:'BEST FRIEND'},
+  {src:'web.jpg', cap:'BIRTHDAY BOY'},
+  {src:'web.jpg', cap:'MEMORIES'},
+  {src:'web.jpg', cap:'LEGEND'},
+  {src:'web.jpg', cap:'TANJID 🎂'}
 ];
-const COLORS = ['#ff0080','#00e5ff','#ffe600','#7c4dff','#00ff88','#ff6b00','#ff2d95'];
+function buildAlbum(){
+  const g=document.getElementById('albumGrid');
+  g.innerHTML='';
+  ALBUM.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='albumCard';
+    d.innerHTML=`<img src="${p.src}" onerror="this.src='https://via.placeholder.com/300/00ff88/000000?text=TANJID'"><div class="caption">${p.cap}</div>`;
+    d.onclick=()=>openPopup(p.src);
+    g.appendChild(d);
+  });
+}
+function openPopup(src){
+  document.getElementById('popupImg').src=src;
+  document.getElementById('popup').classList.add('show');
+}
+function closePopup(e,force){
+  if(force || e.target.id==='popup' || e.target.classList.contains('close'))
+    document.getElementById('popup').classList.remove('show');
+}
 
+/* ============================================================
+   TYPING TITLE
+============================================================ */
+const TEXTS=['HAPPY BIRTHDAY TANJID','শুভ জন্মদিন TANJID','🎂 HAPPY BIRTHDAY TANJID 🎂','TANJID ❤️ VIP HACKER','ACCESS GRANTED — BIRTHDAY MODE ON'];
+const COLORS=['#00ff88','#ff0080','#00e5ff','#ffe600','#7c4dff','#ff6b00'];
 function startTyping(){
-  const el = document.getElementById('typeTitle');
-  let ti = 0, ci = 0, deleting = false;
-
-  function step(){
-    const text = TEXTS[ti];
-    if(!deleting){
-      el.textContent = text.slice(0, ++ci);
-      if(ci === text.length){
-        deleting = true;
-        setTimeout(step, 1600);
-        return;
-      }
+  const el=document.getElementById('typeTitle');
+  let ti=0,ci=0,del=false;
+  (function step(){
+    const t=TEXTS[ti];
+    if(!del){
+      el.textContent=t.slice(0,++ci);
+      if(ci===t.length){del=true;setTimeout(step,1700);return;}
     } else {
-      el.textContent = text.slice(0, --ci);
-      if(ci === 0){
-        deleting = false;
-        ti = (ti + 1) % TEXTS.length;
-        el.style.color = COLORS[Math.floor(Math.random()*COLORS.length)];
-      }
+      el.textContent=t.slice(0,--ci);
+      if(ci===0){del=false;ti=(ti+1)%TEXTS.length;el.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];}
     }
-    setTimeout(step, deleting ? 45 : 95);
+    setTimeout(step, del?40:90);
+  })();
+}
+
+/* ============================================================
+   FLOATING HACK TEXT
+============================================================ */
+const HACKWORDS=['ACCESS GRANTED','BIRTHDAY.EXE','SYSTEM BOOT','HAPPY TANJID','VIP MODE','#HBD_TANJID','FRIEND.LOG','🎂🎉🎈'];
+function spawnHackText(){
+  const e=document.createElement('div');
+  e.className='hackFloat';
+  e.textContent=HACKWORDS[Math.floor(Math.random()*HACKWORDS.length)];
+  e.style.left=Math.random()*90+'vw';
+  e.style.top=(60+Math.random()*30)+'vh';
+  e.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+  e.style.animationDuration=(3+Math.random()*2)+'s';
+  document.getElementById('mainPage').appendChild(e);
+  setTimeout(()=>e.remove(),5200);
+}
+
+/* ============================================================
+   FIREWORKS
+============================================================ */
+const fx=document.getElementById('fx');
+const ctx=fx.getContext('2d');
+let W,H,particles=[],rockets=[];
+function resizeFx(){W=fx.width=innerWidth;H=fx.height=innerHeight;}
+window.addEventListener('resize',resizeFx);
+function rndColor(){return `hsl(${Math.floor(Math.random()*360)},100%,${55+Math.random()*20}%)`;}
+
+class P{
+  constructor(x,y,c,s){
+    this.x=x;this.y=y;
+    const a=Math.random()*Math.PI*2, v=Math.random()*s+1;
+    this.vx=Math.cos(a)*v; this.vy=Math.sin(a)*v;
+    this.life=1; this.decay=.008+Math.random()*.012;
+    this.c=c; this.sz=1.5+Math.random()*2.2;
   }
-  step();
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=.045;this.vx*=.985;this.vy*=.985;this.life-=this.decay;}
+  draw(){ctx.globalAlpha=Math.max(this.life,0);ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,this.sz,0,7);ctx.fill();}
 }
-
-/* ============================================================
-   5) COLOR CYCLE (random VIP colors)
-============================================================ */
-function startColorCycle(){
-  const root = document.documentElement;
-  setInterval(()=>{
-    const rnd = ()=> '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
-    root.style.setProperty('--c1', rnd());
-    root.style.setProperty('--c2', rnd());
-    root.style.setProperty('--c3', rnd());
-    root.style.setProperty('--c4', rnd());
-  }, 1500);
-}
-
-/* ============================================================
-   6) BALLOONS
-============================================================ */
-const EMOJIS = ['🎈','🎈','🎈','🎉','🎊','🎂','🎁','⭐','💖','✨','🌟','🎀'];
-function makeBalloons(){
-  setInterval(()=>{
-    const b = document.createElement('div');
-    b.className = 'balloon';
-    b.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
-    b.style.left = Math.random()*95 + 'vw';
-    b.style.fontSize = (28 + Math.random()*36) + 'px';
-    const dur = 7 + Math.random()*7;
-    b.style.animationDuration = dur + 's';
-    document.getElementById('mainPage').appendChild(b);
-    setTimeout(()=>b.remove(), dur*1000 + 500);
-  }, 420);
-}
-
-/* ============================================================
-   7) RINGS
-============================================================ */
-function makeRings(){
-  setInterval(()=>{
-    const r = document.createElement('div');
-    r.className = 'ring';
-    const size = 60 + Math.random()*120;
-    r.style.width = size + 'px';
-    r.style.height = size + 'px';
-    r.style.left = Math.random()*90 + 'vw';
-    r.style.top = Math.random()*80 + 'vh';
-    r.style.borderColor = COLORS[Math.floor(Math.random()*COLORS.length)];
-    r.style.animationDuration = (2 + Math.random()*2) + 's';
-    document.getElementById('mainPage').appendChild(r);
-    setTimeout(()=>r.remove(), 4500);
-  }, 700);
-}
-
-/* ============================================================
-   8) FIREWORKS CANVAS
-============================================================ */
-const canvas = document.getElementById('fx');
-const ctx = canvas.getContext('2d');
-let W, H;
-let particles = [];
-let rockets = [];
-
-function resizeCanvas(){
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-
-function rndColor(){
-  const hue = Math.floor(Math.random()*360);
-  return `hsl(${hue},100%,${55 + Math.random()*20}%)`;
-}
-
-class Particle{
-  constructor(x,y,color,speed){
-    this.x=x; this.y=y;
-    const a = Math.random()*Math.PI*2;
-    const v = Math.random()*speed + 1;
-    this.vx = Math.cos(a)*v;
-    this.vy = Math.sin(a)*v;
-    this.life = 1;
-    this.decay = 0.008 + Math.random()*0.012;
-    this.color = color;
-    this.size = 1.5 + Math.random()*2.2;
-  }
+class R{
+  constructor(x,ty){this.x=x;this.y=H+10;this.ty=ty;this.c=rndColor();this.vy=-(7+Math.random()*4);this.vx=(Math.random()-.5)*1.5;this.trail=[];}
   update(){
-    this.x += this.vx;
-    this.y += this.vy;
-    this.vy += 0.045;   // gravity
-    this.vx *= 0.985;
-    this.vy *= 0.985;
-    this.life -= this.decay;
-  }
-  draw(){
-    ctx.globalAlpha = Math.max(this.life,0);
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx.fill();
-  }
-}
-
-class Rocket{
-  constructor(x, targetY){
-    this.x = x;
-    this.y = H + 10;
-    this.targetY = targetY;
-    this.color = rndColor();
-    this.vy = -(7 + Math.random()*4);
-    this.vx = (Math.random()-0.5)*1.5;
-    this.trail = [];
-  }
-  update(){
-    this.x += this.vx;
-    this.y += this.vy;
-    this.vy *= 0.985;
-    this.trail.push({x:this.x, y:this.y});
-    if(this.trail.length > 12) this.trail.shift();
-    if(this.y <= this.targetY || this.vy > -1){
-      this.explode();
-      return false;
-    }
+    this.x+=this.vx;this.y+=this.vy;this.vy*=.985;
+    this.trail.push({x:this.x,y:this.y}); if(this.trail.length>12)this.trail.shift();
+    if(this.y<=this.ty||this.vy>-1){this.explode();return false;}
     return true;
   }
   explode(){
-    const count = 60 + Math.floor(Math.random()*70);
-    const color = this.color;
-    for(let i=0;i<count;i++){
-      particles.push(new Particle(this.x, this.y, color, 6));
-    }
-    // secondary color sparkle
-    for(let i=0;i<25;i++){
-      particles.push(new Particle(this.x, this.y, rndColor(), 3.5));
-    }
-    // shock ring
-    for(let i=0;i<30;i++){
-      const p = new Particle(this.x, this.y, '#ffffff', 8);
-      particles.push(p);
-    }
-    if(particles.length > 2200) particles.splice(0, 600);
+    const n=60+Math.floor(Math.random()*70);
+    for(let i=0;i<n;i++) particles.push(new P(this.x,this.y,this.c,6));
+    for(let i=0;i<25;i++) particles.push(new P(this.x,this.y,rndColor(),3.5));
+    if(particles.length>2200) particles.splice(0,600);
   }
   draw(){
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = this.color;
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    this.trail.forEach((p,i)=>{
-      if(i===0) ctx.moveTo(p.x,p.y);
-      else ctx.lineTo(p.x,p.y);
-    });
+    ctx.globalAlpha=1;ctx.strokeStyle=this.c;ctx.lineWidth=2.5;ctx.beginPath();
+    this.trail.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
     ctx.stroke();
   }
 }
-
 function bigBurst(){
-  const x = W*0.15 + Math.random()*W*0.7;
-  const y = H*0.12 + Math.random()*H*0.42;
-  const color = rndColor();
-  for(let i=0;i<140;i++){
-    particles.push(new Particle(x, y, color, 8));
-  }
-  for(let i=0;i<40;i++){
-    particles.push(new Particle(x, y, rndColor(), 5));
-  }
+  const x=W*.15+Math.random()*W*.7;
+  const y=H*.1+Math.random()*H*.45;
+  const c=rndColor();
+  for(let i=0;i<130;i++) particles.push(new P(x,y,c,8));
+  for(let i=0;i<40;i++) particles.push(new P(x,y,rndColor(),5));
 }
-
-function loop(){
-  // trail fade
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.fillStyle = 'rgba(0,0,0,0.16)';
+function fxLoop(){
+  ctx.globalCompositeOperation='destination-out';
+  ctx.fillStyle='rgba(0,0,0,.16)';
   ctx.fillRect(0,0,W,H);
-  ctx.globalCompositeOperation = 'lighter';
-
-  // random auto launch
-  if(Math.random() < 0.055){
-    rockets.push(new Rocket(W*0.1 + Math.random()*W*0.8, H*0.08 + Math.random()*H*0.4));
-  }
-
-  rockets = rockets.filter(r=>{
-    const alive = r.update();
-    if(alive) r.draw();
-    return alive;
-  });
-
-  particles = particles.filter(p=>{
-    p.update();
-    if(p.life > 0){ p.draw(); return true; }
-    return false;
-  });
-
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(loop);
+  ctx.globalCompositeOperation='lighter';
+  if(Math.random()<.055) rockets.push(new R(W*.1+Math.random()*W*.8,H*.08+Math.random()*H*.4));
+  rockets=rockets.filter(r=>{const a=r.update(); if(a)r.draw(); return a;});
+  particles=particles.filter(p=>{p.update(); if(p.life>0){p.draw();return true;} return false;});
+  ctx.globalAlpha=1;
+  requestAnimationFrame(fxLoop);
 }
 
-/* Extra: click anywhere = bomb 💥 */
+/* ============================================================
+   TIC TAC TOE
+============================================================ */
+let tttBoard=['','','','','','','','',''];
+let tttOver=false;
+let tttPlayer='X';
+function buildTTT(){
+  const g=document.getElementById('tttGrid');
+  g.innerHTML='';
+  tttBoard.forEach((v,i)=>{
+    const c=document.createElement('div');
+    c.className='tttCell'+(v?' '+v.toLowerCase():'');
+    c.textContent=v;
+    c.onclick=()=>tttClick(i);
+    g.appendChild(c);
+  });
+}
+function tttClick(i){
+  if(tttOver||tttBoard[i]||tttPlayer!=='X') return;
+  tttBoard[i]='X';
+  renderTTT();
+  if(checkWin('X')){endTTT('🎉 YOU WIN, TANJID!');return;}
+  if(tttBoard.every(c=>c)){endTTT('🤝 DRAW!');return;}
+  tttPlayer='O';
+  document.getElementById('tttStatus').textContent='AI thinking...';
+  setTimeout(aiMove,450);
+}
+function aiMove(){
+  if(tttOver) return;
+  const empty=tttBoard.map((v,i)=>v?null:i).filter(v=>v!==null);
+  // try win, then block, then random
+  let move=pickBest('O') ?? pickBest('X') ?? empty[Math.floor(Math.random()*empty.length)];
+  tttBoard[move]='O';
+  renderTTT();
+  if(checkWin('O')){endTTT('💀 AI WINS! Try again');return;}
+  if(tttBoard.every(c=>c)){endTTT('🤝 DRAW!');return;}
+  tttPlayer='X';
+  document.getElementById('tttStatus').textContent='Your turn!';
+}
+function pickBest(p){
+  const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for(const [a,b,c] of L){
+    const line=[tttBoard[a],tttBoard[b],tttBoard[c]];
+    if(line.filter(v=>v===p).length===2 && line.includes(''))
+      return [a,b,c][line.indexOf('')];
+  }
+  return null;
+}
+function checkWin(p){
+  const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  return L.some(([a,b,c])=>tttBoard[a]===p&&tttBoard[b]===p&&tttBoard[c]===p);
+}
+function renderTTT(){
+  const cells=document.querySelectorAll('.tttCell');
+  cells.forEach((c,i)=>{
+    c.textContent=tttBoard[i];
+    c.className='tttCell'+(tttBoard[i]?' '+tttBoard[i].toLowerCase():'');
+  });
+}
+function endTTT(msg){
+  tttOver=true;
+  document.getElementById('tttStatus').textContent=msg;
+  if(msg.includes('WIN')) for(let i=0;i<3;i++) setTimeout(bigBurst,i*250);
+}
+function resetTTT(){
+  tttBoard=['','','','','','','','',''];
+  tttOver=false;tttPlayer='X';
+  document.getElementById('tttStatus').textContent='Your turn — click a cell!';
+  buildTTT();
+}
+
+/* ============================================================
+   GUESS THE NUMBER
+============================================================ */
+let secret=Math.floor(Math.random()*100)+1;
+let tries=0;
+function checkGuess(){
+  const inp=document.getElementById('guessInput');
+  const msg=document.getElementById('guessMsg');
+  const v=parseInt(inp.value);
+  if(!v||v<1||v>100){msg.textContent='⚠ Enter 1-100!';return;}
+  tries++;
+  if(v===secret){
+    msg.textContent=`🎉 CORRECT! ${tries} tries e peyecho!`;
+    for(let i=0;i<3;i++) setTimeout(bigBurst,i*250);
+    secret=Math.floor(Math.random()*100)+1;
+    tries=0;
+  } else if(v<secret){
+    msg.textContent=`⬆ ${v} — Boro number try koro!`;
+  } else {
+    msg.textContent=`⬇ ${v} — Chhoto number try koro!`;
+  }
+  inp.value='';
+  inp.focus();
+}
+function resetGuess(){
+  secret=Math.floor(Math.random()*100)+1;
+  tries=0;
+  document.getElementById('guessMsg').textContent='🔄 New code set! Guess again';
+  document.getElementById('guessInput').value='';
+}
+document.getElementById('guessInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter') checkGuess();
+});
+
+/* ============================================================
+   CLICK BURST
+============================================================ */
 document.addEventListener('click', e=>{
   if(!document.getElementById('mainPage').classList.contains('show')) return;
-  if(e.target.id === 'musicBtn') return;
-  const color = rndColor();
-  for(let i=0;i<80;i++){
-    particles.push(new Particle(e.clientX, e.clientY, color, 6));
-  }
+  if(e.target.id==='musicBtn'||e.target.closest('.popup')||e.target.closest('.gameBox')) return;
+  const c=rndColor();
+  for(let i=0;i<70;i++) particles.push(new P(e.clientX,e.clientY,c,6));
 });
+
+/* ============================================================
+   START ALL
+============================================================ */
+function startAll(){
+  resizeFx();
+  try{
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    playMelody();
+  }catch(err){console.log(err);}
+  startTyping();
+  buildAlbum();
+  buildTTT();
+  fxLoop();
+  for(let i=0;i<5;i++) setTimeout(bigBurst,i*350);
+  setInterval(spawnHackText,1800);
+}
 </script>
 </body>
 </html>
